@@ -18,7 +18,6 @@ router.get('/', authenticateUser, (req, res) => {
 // new contact
 router.post('/', authenticateUser, (req, res) => {
     const body = req.body
-    console.log(req.user)
     const contact = new Contact(body)
     contact.user = req.user._id
     contact.save()
