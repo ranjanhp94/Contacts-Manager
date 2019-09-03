@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import contactImg from '../img/contact-icon.png'
+import { Card, CardBody, CardTitle, Button, Container, Row, Col } from 'reactstrap';
 
 class ContactShow extends React.Component {
     constructor(props) {
@@ -43,16 +44,26 @@ class ContactShow extends React.Component {
 
     render() {
         return (
-            <div>
-                <br />
-                <img src={contactImg} heigth="200px" width="200px" alt='' />
-                <h4> Name: {this.state.contact.name}</h4>
-                <h4> Mobile: {this.state.contact.mobile}</h4>
-                <h4> Email: {this.state.contact.email}</h4>
-                <Link to="/contacts">Back</Link> {' '}
-                <Link to={`/contacts/edit/${this.state.contact._id}`}>Edit</Link> {' '}
-                <button onClick={this.handleDelete}>Delete</button>
-            </div>
+            <Container>
+                <Row>
+                    <Col sm="12" md={{ size: 6, offset: 3 }}>
+                        <br /> <br />
+                        <div>
+                            <Card>
+                                <CardBody>
+                                    <CardTitle className="text-center"><img src={contactImg} heigth="200px" width="200px" alt='' /></CardTitle>
+                                    <CardTitle><h4> Name : {this.state.contact.name}</h4></CardTitle>
+                                    <CardTitle><h4> Mobile : {this.state.contact.mobile}</h4></CardTitle>
+                                    <CardTitle><h4> Email : {this.state.contact.email}</h4></CardTitle>
+                                    <Link className="btn btn-primary" to="/contacts">Back</Link> {' '}
+                                    <Link className="btn btn-primary" to={`/contacts/edit/${this.state.contact._id}`}>Edit</Link> {' '}
+                                    <Button color="primary" onClick={this.handleDelete}>Delete</Button>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

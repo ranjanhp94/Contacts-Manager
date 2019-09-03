@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 
 class Register extends React.Component {
     constructor(props) {
@@ -94,26 +95,45 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Register</h2>
-                {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
-                {this.state.successMsg && <p>{this.state.successMsg}</p>}
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name
-                        <input type="text" value={this.state.name} onChange={this.handleChange} name="name" errortext={this.state.nameError} />
-                    </label> <span>{this.state.nameError}</span> <br />
-                    <label>
-                        Email
-                        <input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
-                    </label> <span>{this.state.emailError}</span> <br />
-                    <label>
-                        Password
-                        <input type="password" value={this.state.password} onChange={this.handleChange} name="password" errortext={this.state.passwordError} />
-                    </label> <span>{this.state.passwordError}</span> <br />
-                    <input type="submit" value="Register" />
-                </form>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+
+                    </div>
+                    <div className="col border border-primary shadow-lg p-3 mb-5 bg-white rounded p-4 m-4">
+                        <Form onSubmit={this.handleSubmit}>
+                            <h3 className="text-center">Register</h3>
+
+                            {this.state.errorMsg && <Alert>{this.state.errorMsg}</Alert>}
+                            {this.state.successMsg && <Alert>{this.state.successMsg}</Alert>}
+
+                            <FormGroup>
+                                <Label> Name </Label>
+                                <Input type="text" value={this.state.name} onChange={this.handleChange} name="name" errortext={this.state.nameError} />
+                                <span>{this.state.nameError}</span>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <label> Email </label>
+                                <Input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
+                                <span>{this.state.emailError}</span>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <label> Password </label>
+                                <Input type="password" value={this.state.password} onChange={this.handleChange} name="password" errortext={this.state.passwordError} />
+                                <span>{this.state.passwordError}</span>
+                            </FormGroup>
+
+                            <Button color="primary" size="lg">Submit</Button>
+                        </Form>
+                    </div>
+                    <div className="col">
+
+                    </div>
+                </div>
             </div>
+
         )
     }
 }

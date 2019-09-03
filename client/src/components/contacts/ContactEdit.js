@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class ContactNew extends React.Component {
     constructor(props) {
@@ -103,26 +105,42 @@ class ContactNew extends React.Component {
     }
 
     render() {
-        console.log()
         return (
-            <div>
-                <h2>Contact Edit</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name
-                        <input type="text" value={this.state.name} onChange={this.handleChange} name="name" errortext={this.state.nameError} />
-                    </label> <span>{this.state.nameError}</span> <br />
-                    <label>
-                        Email
-                        <input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
-                    </label> <span>{this.state.emailError}</span> <br />
-                    <label>
-                        Mobile
-                        <input type="mobile" value={this.state.mobile} onChange={this.handleChange} name="mobile" errortext={this.state.mobileError} />
-                    </label> <span>{this.state.mobileError}</span> <br />
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+            <Container>
+                <Row>
+                    <Col sm="12" md={{ size: 6, offset: 3 }}>
+                        <br />
+                        <div>
+                            <Form onSubmit={this.handleSubmit}>
+                                <h3 className="text-center">Edit Contact</h3>
+
+                                <FormGroup>
+                                    <Label> Name : </Label>
+                                    <Input type="text" value={this.state.name} onChange={this.handleChange} name="name" errortext={this.state.nameError} />
+                                    <span>{this.state.nameError}</span>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label> Email : </Label>
+                                    <Input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
+                                    <span>{this.state.emailError}</span>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label> Mobile : </Label>
+                                    <Input type="mobile" value={this.state.mobile} onChange={this.handleChange} name="mobile" errortext={this.state.mobileError} />
+                                    <span>{this.state.mobileError}</span>
+                                </FormGroup>
+
+                                <div className="text-right">
+                                    <Button color="primary">Submit</Button>
+                                    {' '}<Link className="btn btn-primary" to="/contacts">Back</Link>
+                                </div>
+                            </Form>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

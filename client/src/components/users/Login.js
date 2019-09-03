@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
 
 class Login extends React.Component {
     constructor(props) {
@@ -7,11 +8,14 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            errorMsg: '',
-            successMsg: ''
+            emailError: '',
+            passwordError: '',
+            hidden: false,
+            errorMsg: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.showPassword = this.showPassword.bind(this)
     }
 
     handleChange(e) {
@@ -21,8 +25,51 @@ class Login extends React.Component {
         })
     }
 
+    showPassword(event) {
+        let checked = event.target.checked
+        this.setState({
+            hidden: checked
+        })
+        console.log(checked)
+    }
+
+    validate = () => {
+        let isError = false
+        const errors = {
+            emailError: '',
+            passwordError: ''
+        }
+
+        if (this.state.email.length === 0) {
+            isError = true
+            errors.emailError = 'Please Provide Email'
+        } else {
+            errors.emailError = 'Please Provide a valid Email'
+        }
+
+        if (this.state.password.length === 0) {
+            isError = true
+            errors.passwordError = 'Please Provide Password'
+        }
+
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+
+        return isError;
+    }
+
     handleSubmit(e) {
         e.preventDefault()
+        const err = this.validate()
+        if (!err) {
+            this.setState({
+                emailError: '',
+                passwordError: ''
+            })
+        }
+
         const formData = {
             email: this.state.email,
             password: this.state.password
@@ -46,20 +93,42 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Login</h2>
-                {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        email
-                        <input type="email" value={this.state.email} onChange={this.handleChange} name="email" />
-                    </label> <br />
-                    <label>
-                        password
-                        <input type="password" value={this.state.password} onChange={this.handleChange} name="password" />
-                    </label> <br />
-                    <input type="submit" value="Login" />
-                </form>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+
+                    </div>
+                    <div className="col border border-primary shadow-lg p-3 mb-5 bg-white rounded p-4 m-4">
+                        <Form onSubmit={this.handleSubmit}>
+
+                            <h3 className="text-center">Login</h3>
+
+                            {this.state.errorMsg && <Alert><p>{this.state.errorMsg}</p> </Alert>}
+
+                            <FormGroup>
+                                <Label> Email  </Label>
+                                <Input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
+                                <span>{this.state.emailError}</span>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label> Password </Label>
+                                <Input type={this.state.hidden ? "text" : "password"} value={this.state.password} onChange={this.handleChange} name="password" errortext={this.state.passwordError} />
+                                <span>{this.state.passwordError}</span>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <FormText><input type="checkbox" name="toggle" onChange={this.showPassword} /> Show Password</FormText>
+                            </FormGroup>
+
+                            <Button color="primary" size="lg">Login</Button>
+
+                        </Form>
+                    </div>
+                    <div className="col">
+
+                    </div>
+                </div>
             </div>
         )
     }
