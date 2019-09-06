@@ -13,8 +13,9 @@ import {
     DropdownItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import contactImg from '../img/contact-icon-1.jpg';
 
-export default class Example extends React.Component {
+export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
 
@@ -32,7 +33,8 @@ export default class Example extends React.Component {
         return (
             <div>
                 <Navbar color="primary" expand="md">
-                    <NavbarBrand style={{ color: "white" }}>Contact Manager</NavbarBrand>
+                    <Link to="/user" style={{ textDecoration: 'none' }}><img src={contactImg} height="40px" width="40px" alt="" /></Link>
+                    <NavbarBrand tag={Link} to="/user" style={{ color: "white" }}>Contact Manager</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
@@ -50,10 +52,10 @@ export default class Example extends React.Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <NavItem>
-                                <NavLink href="/user" style={{ color: "white" }}>Home</NavLink>
+                                <NavLink tag={Link} to="/user" style={{ color: "white" }}>Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/user/logout" style={{ color: "white" }}>Logout</NavLink>
+                                <NavLink tag={Link} to="/user/logout" style={{ color: "white" }}>Logout</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

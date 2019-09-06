@@ -10,13 +10,14 @@ import ContactNew from '../src/components/contacts/ContactNew';
 import ContactShow from '../src/components/contacts/ContactShow';
 import ContactEdit from '../src/components/contacts/ContactEdit';
 import NavBar from '../src/components/home/NavBar';
+import Footer from '../src/components/home/Footer';
 
 class App extends React.Component {
   render() {
 
     const style = {
       background: '#f2f2f2',
-      height: '660px'
+      height: '560px'
     }
 
     return (
@@ -37,6 +38,7 @@ class App extends React.Component {
 
           </Switch>
         </div>
+        <Footer />
       </BrowserRouter>
     )
   }

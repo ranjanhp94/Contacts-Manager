@@ -1,13 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import axios from 'axios';
 
 class User extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: ''
+        }
+    }
+
     render() {
         return (
             <div>
-                <h2>Welcome</h2>
                 <br />
-                <Link to="/user/logout">Logout</Link>
+                <h2>Welcome {this.state.name}</h2>
             </div>
         )
     }
