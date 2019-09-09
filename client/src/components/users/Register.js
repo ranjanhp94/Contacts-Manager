@@ -43,7 +43,7 @@ class Register extends React.Component {
             errors.emailError = 'Enter a valid email address'
         }
 
-        if (this.state.password.length <= 5) {
+        if (this.state.password.length < 5) {
             isError = true;
             errors.passwordError = 'Password must atleast contain 5 characters'
         }
@@ -73,7 +73,7 @@ class Register extends React.Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:3005/user/register', formData)
+        axios.post(`http://localhost:3005/user/register`, formData)
             .then(response => {
                 if (response.data.hasOwnProperty('errors')) {
                     // failure msg(from backend)
@@ -82,10 +82,8 @@ class Register extends React.Component {
                         successMsg: 'successfully registered',
                         name: '',
                         email: '',
-                        password: '',
-                        errorMsg: ''
+                        password: ''
                     })
-                    this.props.history.push('/user/login')
                 }
             })
             .catch(err => {
@@ -133,7 +131,6 @@ class Register extends React.Component {
                     </div>
                 </div>
             </div>
-
         )
     }
 }

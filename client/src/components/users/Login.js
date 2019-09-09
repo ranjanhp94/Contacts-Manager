@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
+import User from '../home/User'
 
 class Login extends React.Component {
     constructor(props) {
@@ -11,7 +12,9 @@ class Login extends React.Component {
             emailError: '',
             passwordError: '',
             hidden: false,
-            errorMsg: ''
+            errorMsg: '',
+            details: '',
+            isLoggedIn: false
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -30,7 +33,6 @@ class Login extends React.Component {
         this.setState({
             hidden: checked
         })
-        console.log(checked)
     }
 
     validate = () => {
@@ -62,6 +64,21 @@ class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
+        let email = this.state.email
+        let name = this.state.details
+        axios.get(`http://localhost:3005/user`, { headers: { 'x-auth': localStorage.getItem('userAuth') } })
+            .then(response => {
+                response.data.forEach((req) => {
+                    if (req.email === email) {
+                        this.setState({
+                            details: req.name,
+                            isLoggedIn: true
+                        })
+                    }
+                })
+            })
+
+
         const err = this.validate()
         if (!err) {
             this.setState({
@@ -83,15 +100,18 @@ class Login extends React.Component {
                     })
                 } else {
                     localStorage.setItem('userAuth', response.data.token)
-                    this.props.history.push('/user')
                 }
             })
             .catch(err => {
                 console.log(err)
             })
+        this.props.onUsernameChange(name);
     }
 
     render() {
+        if (this.state.isLoggedIn) {
+            return <User username={this.state.details} />
+        }
         return (
             <div className="container">
                 <div className="row">

@@ -58,7 +58,14 @@ class Contact extends React.Component {
                                 </thead>
                                 <tbody>
                                     {
-                                        this.state.filteredData.map((contact, index) => {
+                                        this.state.filteredData.sort((a, b) => {
+                                            var aname = a.name.toLowerCase(), bname = b.name.toLowerCase()
+                                            if (aname < bname)
+                                                return -1;
+                                            else if (aname > bname)
+                                                return 1;
+                                            return 0;
+                                        }).map((contact, index) => {
                                             return (
                                                 <tr key={contact._id}>
                                                     <td>{index + 1}</td>
