@@ -84,6 +84,7 @@ class Register extends React.Component {
                         email: '',
                         password: ''
                     })
+                    this.props.history.push('/user/login')
                 }
             })
             .catch(err => {

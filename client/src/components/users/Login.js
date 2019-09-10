@@ -62,7 +62,6 @@ class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         let email = this.state.email
-        let name = this.state.details
         axios.get(`http://localhost:3005/user`, { headers: { 'x-auth': localStorage.getItem('userAuth') } })
             .then(response => {
                 response.data.forEach((req) => {
@@ -94,12 +93,12 @@ class Login extends React.Component {
                     })
                 } else {
                     localStorage.setItem('userAuth', response.data.token)
+                    this.props.history.push('/user')
                 }
             })
             .catch(err => {
                 console.log(err)
             })
-        this.props.onUsernameChange(name);
     }
 
     render() {
