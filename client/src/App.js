@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../src/components/home/Home';
+import User from '../src/components/home/User';
 import Register from '../src/components/users/Register';
 import Login from '../src/components/users/Login';
 import Logout from '../src/components/users/Logout';
@@ -38,6 +39,7 @@ class App extends React.Component {
           <Switch>
 
             <Route path="/" component={Home} exact={true} />
+            <Route path="/user" render={() => <User username={this.state.name} />} exact={true} />
             <Route path="/user/register" component={Register} exact={true} />
             <Route path="/user/login" render={() => <Login onUsernameChange={this.onUsernameChange} />} exact={true} />
             <Route path="/user/logout" component={Logout} exact={true} />

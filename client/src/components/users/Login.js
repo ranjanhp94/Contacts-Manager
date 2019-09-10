@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
-import User from '../home/User'
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,9 +11,7 @@ class Login extends React.Component {
             emailError: '',
             passwordError: '',
             hidden: false,
-            errorMsg: '',
-            details: '',
-            isLoggedIn: false
+            errorMsg: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -70,10 +67,7 @@ class Login extends React.Component {
             .then(response => {
                 response.data.forEach((req) => {
                     if (req.email === email) {
-                        this.setState({
-                            details: req.name,
-                            isLoggedIn: true
-                        })
+                        localStorage.setItem('name', req.name)
                     }
                 })
             })
@@ -109,9 +103,6 @@ class Login extends React.Component {
     }
 
     render() {
-        if (this.state.isLoggedIn) {
-            return <User username={this.state.details} />
-        }
         return (
             <div className="container">
                 <div className="row">
