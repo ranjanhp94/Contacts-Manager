@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import Home from '../src/components/home/Home';
 import User from '../src/components/home/User';
 import Register from '../src/components/users/Register';
@@ -11,6 +11,8 @@ import ContactShow from '../src/components/contacts/ContactShow';
 import ContactEdit from '../src/components/contacts/ContactEdit';
 import NavBar from '../src/components/home/NavBar';
 import Footer from '../src/components/home/Footer';
+import PrivateRoute from '../src/components/PrivateRoute';
+import PublicRoute from '../src/components/PublicRoute';
 
 class App extends React.Component {
   render() {
@@ -26,15 +28,15 @@ class App extends React.Component {
         <div style={style}>
           <Switch>
 
-            <Route path="/" component={Home} exact={true} />
-            <Route path="/user" component={User} exact={true} />
-            <Route path="/user/register" component={Register} exact={true} />
-            <Route path="/user/login" component={Login} exact={true} />
-            <Route path="/user/logout" component={Logout} exact={true} />
-            <Route path="/contacts" component={Contact} exact={true} />
-            <Route path="/contacts/new" component={ContactNew} exact={true} />
-            <Route path="/contacts/:id" component={ContactShow} exact={true} />
-            <Route path="/contacts/edit/:id" component={ContactEdit} exact={true} />
+            <PublicRoute path="/" component={Home} exact={true} />
+            <PrivateRoute path="/user" component={User} exact={true} />
+            <PublicRoute path="/user/register" component={Register} exact={true} />
+            <PublicRoute path="/user/login" component={Login} exact={true} />
+            <PrivateRoute path="/user/logout" component={Logout} exact={true} />
+            <PrivateRoute path="/contacts" component={Contact} exact={true} />
+            <PrivateRoute path="/contacts/new" component={ContactNew} exact={true} />
+            <PrivateRoute path="/contacts/:id" component={ContactShow} exact={true} />
+            <PrivateRoute path="/contacts/edit/:id" component={ContactEdit} exact={true} />
 
           </Switch>
         </div>

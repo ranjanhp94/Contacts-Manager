@@ -60,7 +60,7 @@ class Login extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
         let email = this.state.email
         axios.get(`http://localhost:3005/user`, { headers: { 'x-auth': localStorage.getItem('userAuth') } })
             .then(response => {
@@ -70,7 +70,6 @@ class Login extends React.Component {
                     }
                 })
             })
-
 
         const err = this.validate()
         if (!err) {
@@ -93,6 +92,7 @@ class Login extends React.Component {
                     })
                 } else {
                     localStorage.setItem('userAuth', response.data.token)
+                    localStorage.setItem('isLogged', false)
                     this.props.history.push('/user')
                 }
             })

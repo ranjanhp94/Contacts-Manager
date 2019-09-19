@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <label>
-                    <input type="text" className="form-control search-form" style={round} name="search" placeholder="Search by Name / Mobile" onChange={this.handleSearch} />
+                    <input type="text" className="form-control search-form" style={round} name="search" placeholder="Search by Name /Mobile No." onChange={this.handleSearch} />
                 </label>
             </div>
         )

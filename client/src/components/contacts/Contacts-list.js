@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Table, Container, Row, Col, Badge } from 'reactstrap';
+import { Table, Container, Row, Col, Badge, Spinner } from 'reactstrap';
 import SearchBar from './SearchBar';
 
 class Contact extends React.Component {
@@ -9,7 +9,8 @@ class Contact extends React.Component {
         super(props);
         this.state = {
             contacts: [],
-            filteredData: []
+            filteredData: [],
+            isLoaded: false
         }
         this.handleSearchByCode = this.handleSearchByCode.bind(this);
     }
@@ -25,7 +26,8 @@ class Contact extends React.Component {
             .then(response =>
                 this.setState(() => ({
                     contacts: response.data,
-                    filteredData: response.data
+                    filteredData: response.data,
+                    isLoaded: true
                 }))
             )
     }
@@ -46,42 +48,47 @@ class Contact extends React.Component {
 
                 <Row>
                     <Col sm={{ size: 8, order: 3, offset: 1 }} style={scroll}>
-                        <div>
-                            <Table striped bordered size="sm" hover>
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Name</th>
-                                        <th>Mobile</th>
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this.state.filteredData.sort((a, b) => {
-                                            var aname = a.name.toLowerCase(), bname = b.name.toLowerCase()
-                                            if (aname < bname)
-                                                return -1;
-                                            else if (aname > bname)
-                                                return 1;
-                                            return 0;
-                                        }).map((contact, index) => {
-                                            return (
-                                                <tr key={contact._id}>
-                                                    <td>{index + 1}</td>
-                                                    <td><Link to={`/contacts/${contact._id}`}>{contact.name}</Link></td>
-                                                    <td>{contact.mobile}</td>
-                                                    <td>{contact.email}</td>
-                                                </tr>
-                                            );
-                                        })
-                                    }
-                                </tbody>
-                            </Table>
-                        </div>
+                        {!this.state.isLoaded ? <div className="text-center"><Spinner color="primary" /></div> : (this.state.filteredData.length === 0 ? <h5 className="text-center">No Contacts found.</h5> :
+                            < div >
+                                <Table striped bordered size="sm" hover>
+
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {
+                                            this.state.filteredData.sort((a, b) => {
+                                                var aname = a.name.toLowerCase(), bname = b.name.toLowerCase()
+                                                if (aname < bname)
+                                                    return -1;
+                                                else if (aname > bname)
+                                                    return 1;
+                                                return 0;
+                                            }).map((contact, index) => {
+                                                return (
+                                                    <tr key={contact._id}>
+                                                        <td>{index + 1}</td>
+                                                        <td><Link to={`/contacts/${contact._id}`}>{contact.name}</Link></td>
+                                                        <td>{contact.mobile}</td>
+                                                        <td>{contact.email}</td>
+                                                    </tr>
+                                                );
+                                            })
+                                        }
+                                    </tbody>
+                                </Table>
+                            </div>
+                        )
+                        }
                     </Col>
                 </Row>
-            </Container>
+            </Container >
         )
     }
 }
