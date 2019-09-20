@@ -27,8 +27,18 @@ export default class NavBar extends React.Component {
             <div>
                 {
                     this.state.local ? (<div>
-                        <Link className="btn btn-primary" to="/user/register">Register</Link>
-                        <Link className="btn btn-primary" to="/user/login">Login</Link>
+                        <Navbar color="primary" expand="md">
+                            <Link to="/user" style={{ textDecoration: 'none' }}><img src={contactImg} height="40px" width="40px" alt="" /></Link>
+                            <NavbarBrand tag={Link} to="/user" style={{ color: "white" }}>Contact Manager</NavbarBrand>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/user/register" style={{ color: "white" }}>Register</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} to="/user/login" style={{ color: "white" }}>Login</NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Navbar>
                     </div>)
                         :
                         (<div>
@@ -55,7 +65,7 @@ export default class NavBar extends React.Component {
                                             <NavLink tag={Link} to="/user" style={{ color: "white" }}>Home</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <Link className="btn btn-primary" to="/user/logout">Logout</Link>
+                                            <NavLink tag={Link} to="/user/logout" style={{ color: "white" }}>Logout</NavLink>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>

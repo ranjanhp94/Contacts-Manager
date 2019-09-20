@@ -48,7 +48,7 @@ class Contact extends React.Component {
 
                 <Row>
                     <Col sm={{ size: 8, order: 3, offset: 1 }} style={scroll}>
-                        {!this.state.isLoaded ? <div className="text-center"><Spinner color="primary" /></div> : (this.state.filteredData.length === 0 ? <h5 className="text-center">No Contacts found.</h5> :
+                        {!this.state.isLoaded ? <div className="text-center"><Spinner color="primary" /></div> : (this.state.filteredData.length === 0 ? <h5 className="text-center">No Contacts Added Yet.</h5> :
                             < div >
                                 <Table striped bordered size="sm" hover>
 

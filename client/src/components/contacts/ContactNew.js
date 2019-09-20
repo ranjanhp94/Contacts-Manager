@@ -109,19 +109,19 @@ class ContactNew extends React.Component {
                                 <FormGroup>
                                     <Label> Name : </Label>
                                     <Input type="text" value={this.state.name} onChange={this.handleChange} name="name" errortext={this.state.nameError} />
-                                    <span>{this.state.nameError}</span>
+                                    <span style={{ color: "red" }}>{this.state.nameError}</span>
                                 </FormGroup>
 
                                 <FormGroup>
                                     <Label> Email : </Label>
                                     <Input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
-                                    <span>{this.state.emailError}</span>
+                                    <span style={{ color: "red" }}>{this.state.emailError}</span>
                                 </FormGroup>
 
                                 <FormGroup>
                                     <Label> Mobile : </Label>
                                     <Input type="mobile" value={this.state.mobile} onChange={this.handleChange} name="mobile" errortext={this.state.mobileError} />
-                                    <span>{this.state.mobileError}</span>
+                                    <span style={{ color: "red" }}>{this.state.mobileError}</span>
                                 </FormGroup>
 
                                 <div className="text-right">

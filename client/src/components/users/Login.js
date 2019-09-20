@@ -94,6 +94,7 @@ class Login extends React.Component {
                     localStorage.setItem('userAuth', response.data.token)
                     localStorage.setItem('isLogged', false)
                     this.props.history.push('/user')
+                    window.location.reload()
                 }
             })
             .catch(err => {
@@ -118,13 +119,13 @@ class Login extends React.Component {
                             <FormGroup>
                                 <Label> Email  </Label>
                                 <Input type="email" value={this.state.email} onChange={this.handleChange} name="email" errortext={this.state.emailError} />
-                                <span>{this.state.emailError}</span>
+                                <span style={{ color: "red" }}>{this.state.emailError}</span>
                             </FormGroup>
 
                             <FormGroup>
                                 <Label> Password </Label>
                                 <Input type={this.state.hidden ? "text" : "password"} value={this.state.password} onChange={this.handleChange} name="password" errortext={this.state.passwordError} />
-                                <span>{this.state.passwordError}</span>
+                                <span style={{ color: "red" }}>{this.state.passwordError}</span>
                             </FormGroup>
 
                             <FormGroup>

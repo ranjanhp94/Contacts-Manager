@@ -8,6 +8,7 @@ class Logout extends React.Component {
                 localStorage.removeItem('userAuth')
                 localStorage.setItem('isLogged', true)
                 this.props.history.push('/user/login')
+                window.location.reload()
             })
             .catch((err) => {
                 console.log(err)
