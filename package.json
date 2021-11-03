@@ -23,6 +23,6 @@
     "react-refresh": "^0.4.2",
     "react-router-dom": "^5.0.1",
     "reactstrap": "^8.0.1",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   }
 }
